@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from config import * # Importamos el token del archivo config
 import telebot # Importamos libreria de la API de Telegram
+import time as tm
 
 # Instanciamos nuestro bot
 bot = telebot.TeleBot(API_TOKEN)
@@ -17,14 +18,13 @@ def cmd_welcome(message):
 def cmd_help(message):
     comando = "/start" "\n"
     comando += "/help" "\n"
-    comando += "/foto" "\n"
+    comando += "/Proyector" "\n"
     bot.send_message(message.chat.id, comando, parse_mode='html')
 
 # Comando foto
-@bot.message_handler(commands=['foto'])
-def cmd_foto(message):
-    foto = open('img/prueba.jpg', 'rb')
-    bot.send_photo(message.chat.id, foto, "Prueba 1")
+@bot.message_handler(commands=['proyector'])
+def cmd_proyector(message):
+    bot.send_message(message.chat.id, "<b>Listo para empezar enciende el proyecto</b>", parse_mode="html")
 
 # Respuesta Mensajes sin comandos
 @bot.message_handler(content_types=['text'])
