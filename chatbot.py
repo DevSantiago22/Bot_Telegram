@@ -2,6 +2,8 @@
 from config import * # Importamos el token del archivo config
 import telebot # Importamos libreria de la API de Telegram
 import time as tm
+import pathlib as pl
+import numpy as np
 
 # Instanciamos nuestro bot
 bot = telebot.TeleBot(API_TOKEN)
@@ -21,10 +23,30 @@ def cmd_help(message):
     comando += "/Proyector" "\n"
     bot.send_message(message.chat.id, comando, parse_mode='html')
 
-# Comando foto
+# Comando proyecto
 @bot.message_handler(commands=['proyector'])
 def cmd_proyector(message):
-    bot.send_message(message.chat.id, "<b>Listo para empezar enciende el proyecto</b>", parse_mode="html")
+    bot.send_message(message.chat.id, "<b>Sigue los paso y podras conectar tu proyector</b>", parse_mode='html')
+    bot.send_message(message.chat.id, "<b>Cuando estes listo:</b> Envia /listo", parse_mode='html')
+    rout = "img/"
+    directory = pl.Path(rout)
+    photo = []
+    for x in directory.iterdir():
+        photo.append(np.array(x.name, dtype="object"))
+        print(photo)
+    cmd_listo(message, photo)
+
+# Comando listo 
+@bot.message_handler(commands=['listo'])
+def cmd_listo(message, photo):
+    for i in photo:
+        url = "img/" + photo[i]
+        print(url)
+        i = i + 1
+        image = open(url, 'rb')
+        bot.send_photo(message.chat.id, image, "<b>Paso 1:</b>", parse_mode='html')
+
+    
 
 # Respuesta Mensajes sin comandos
 @bot.message_handler(content_types=['text'])
