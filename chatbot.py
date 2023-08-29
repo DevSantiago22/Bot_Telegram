@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
 from config import * # Importamos el token del archivo config
 import telebot # Importamos libreria de la API de Telegram
-import time as tm
-import pathlib as pl
-import numpy as np
+import time as tm # Importamos para usar sleep en el codigo
+import os # Importamos para poder listar y recorrer las imagenes
 
 # Instanciamos nuestro bot
 bot = telebot.TeleBot(API_TOKEN)
-# Variable diccionario para informacion temporal
 
 # Comando /start para iniciar el bot
 @bot.message_handler(commands=['start'])
 def cmd_welcome(message):
-    msg = "Hola yo soy chatbot ¿En que puedo ayudarle?"
+    msg = "Hola " + message.chat.first_name + " ¿En que puedo ayudarte?"
     bot.reply_to(message, msg)
 
 # Comando ayuda
@@ -28,25 +26,24 @@ def cmd_help(message):
 def cmd_proyector(message):
     bot.send_message(message.chat.id, "<b>Sigue los paso y podras conectar tu proyector</b>", parse_mode='html')
     bot.send_message(message.chat.id, "<b>Cuando estes listo:</b> Envia /listo", parse_mode='html')
-    rout = "img/"
-    directory = pl.Path(rout)
-    photo = []
-    for x in directory.iterdir():
-        photo.append(np.array(x.name, dtype="object"))
-        print(photo)
-    cmd_listo(message, photo)
 
 # Comando listo 
 @bot.message_handler(commands=['listo'])
-def cmd_listo(message, photo):
-    for i in photo:
-        url = "img/" + photo[i]
-        print(url)
-        i = i + 1
-        image = open(url, 'rb')
-        bot.send_photo(message.chat.id, image, "<b>Paso 1:</b>", parse_mode='html')
+def cmd_listo(message):
+    image = rout_photo()
+    for i in image:
+        foto = "img/" + i
+        abrir = open(foto, 'rb')
+        bot.send_photo(message.chat.id, abrir)
 
-    
+# Funcion que se encarga de listar las fotos a enviar
+def rout_photo():
+    directorio = "img/"
+    contenido = os.listdir(directorio)
+    img = []
+    for ficheros in contenido:
+        if os.path.isfile(os.path.join(directorio, ficheros)) and ficheros.endswith('.jpg'):
+            img.append(ficheros)
 
 # Respuesta Mensajes sin comandos
 @bot.message_handler(content_types=['text'])
