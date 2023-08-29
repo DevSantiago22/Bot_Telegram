@@ -31,10 +31,20 @@ def cmd_proyector(message):
 @bot.message_handler(commands=['listo'])
 def cmd_listo(message):
     image = rout_photo()
+    response = list_response()
     for i in image:
         foto = "img/" + i
         abrir = open(foto, 'rb')
+        print(response)
         bot.send_photo(message.chat.id, abrir)
+        tm.sleep(8)
+
+def list_response():
+    rout = open("otros/respuestas.txt")
+    response = []
+    for i in rout:
+        response.append(i)
+    return response
 
 # Funcion que se encarga de listar las fotos a enviar
 def rout_photo():
@@ -44,6 +54,7 @@ def rout_photo():
     for ficheros in contenido:
         if os.path.isfile(os.path.join(directorio, ficheros)) and ficheros.endswith('.jpg'):
             img.append(ficheros)
+    return img
 
 # Respuesta Mensajes sin comandos
 @bot.message_handler(content_types=['text'])
