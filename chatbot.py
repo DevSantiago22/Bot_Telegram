@@ -32,19 +32,20 @@ def cmd_proyector(message):
 def cmd_listo(message):
     image = rout_photo()
     response = list_response()
+    x = 0
     for i in image:
+        respuesta = response[x]
         foto = "img/" + i
         abrir = open(foto, 'rb')
-        print(response)
-        bot.send_photo(message.chat.id, abrir)
-        tm.sleep(8)
+        bot.send_photo(message.chat.id, abrir, respuesta)
+        x = x + 1
+        tm.sleep(6)
 
 def list_response():
-    rout = open("otros/respuestas.txt")
-    response = []
-    for i in rout:
-        response.append(i)
-    return response
+    with open('otros/respuestas.txt') as file_object:
+        object = file_object.readlines() 
+    return object
+         
 
 # Funcion que se encarga de listar las fotos a enviar
 def rout_photo():
