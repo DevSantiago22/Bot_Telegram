@@ -27,7 +27,7 @@ $ git clone https://github.com/DevSantiago22/Bot_Telegram.git
 $ .code
 ```
 Instalacion sin usar git
-1. *Presionar la tecla windows + r y en la ventana escribimos cmd
+1. Presionar la tecla windows + r y en la ventana escribimos cmd
 ```
 $ pip install pytelegrambotapi
 ```
@@ -55,4 +55,4 @@ DevSantiago22
 >https://github.com/DevSantiago22
 2. Contacto
 >DevSantiago22@gmail.com
-3. Para trabajos preguntal o modificacion contactarme
+3. Para trabajos,proyectos,preguntas o modificacion contactarme
