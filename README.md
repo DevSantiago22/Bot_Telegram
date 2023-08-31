@@ -56,3 +56,7 @@ DevSantiago22
 2. Contacto
 >DevSantiago22@gmail.com
 3. Para trabajos,proyectos,preguntas o modificacion contactarme
+
+| Headline 1 in the tablehead | Headline 2 in the tablehead | Headline 3 in the tablehead |
+|:--------------:|:--------------:|:--------------:|
+| text-aling center | text-aling center  | text-aling center |
