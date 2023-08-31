@@ -12,6 +12,7 @@ bot = telebot.TeleBot(API_TOKEN)
 def cmd_welcome(message):
     msg = "Hola " + message.chat.first_name + " ¿En que puedo ayudarte?"
     bot.reply_to(message, msg)
+    bot.send_message(message.chat.id, "<b>Envia el comando /help para consultar los comandos</b>")
 
 # Comando ayuda
 @bot.message_handler(commands=['help'])
@@ -27,6 +28,12 @@ def cmd_proyector(message):
     bot.send_message(message.chat.id, "<b>Sigue los paso y podras conectar tu proyector</b>", parse_mode='html')
     bot.send_message(message.chat.id, "<b>Cuando estes listo:</b> Envia /listo", parse_mode='html')
 
+# Comando pdf
+@bot.message_handler(commands=['pdf'])
+def cmd_pdf(message):
+    pdf = open('pdf/Conexion proyector.pdf', 'rb')
+    bot.send_document(message.chat.id, pdf)
+
 # Comando listo 
 @bot.message_handler(commands=['listo'])
 def cmd_listo(message):
@@ -37,15 +44,16 @@ def cmd_listo(message):
         respuesta = response[x]
         foto = "img/" + i
         abrir = open(foto, 'rb')
-        bot.send_photo(message.chat.id, abrir, respuesta)
+        bot.send_photo(message.chat.id, abrir, "<b>"+respuesta+"</b>", parse_mode="html")
         x = x + 1
         tm.sleep(6)
+    bot.send_message(message.chat.id, "<b>Fue un placer ayudarte, puedes consultar el pdf con /pdf</b>", parse_mode="html")
 
+# Funcion que lista y devuelve las respuestas del bot
 def list_response():
     with open('otros/respuestas.txt') as file_object:
         object = file_object.readlines() 
     return object
-         
 
 # Funcion que se encarga de listar las fotos a enviar
 def rout_photo():

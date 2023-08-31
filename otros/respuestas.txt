@@ -1,9 +1,9 @@
-paso 1
-paso 2
-paso 3
-paso 4
-paso 5
-paso 6
-paso 7
-paso 8
-paso 9
+1-Seleccionar opcion red en proyector
+Opcion seleccionada en proyector
+2-Seleccionar tarjetas de red Wifi
+3-Seleccionar red casiolpj88C y hacer clic en conectar 
+Conexion realizada con WIFI de proyector, debe quedar como muestra en la imagen
+4-En el escritorio abrimos la aplicacion c - Connected
+5-Hacemos clic en connect
+6-Una vez conectado hacemos clic en la siguiente opcion
+7-Por ultimo hacemos clic en la siguiente opcion y debe de mostrar la imagen en el proyector
