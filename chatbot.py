@@ -10,13 +10,13 @@ bot = telebot.TeleBot(API_TOKEN)
 def cmd_welcome(message):
     msg = "<b>Hola " + message.chat.first_name + " ¿En que puedo ayudarte?</b>"
     bot.reply_to(message, msg, parse_mode="html")
-    bot.send_message(message.chat.id, "<b>Para conocer los comandos envia: /help</b>", parse_mode="html")
+    bot.send_message(message.chat.id, "<b>Para conocer los comandos envia:/help</b>", parse_mode="html")
 
 # Comando ayuda
 @bot.message_handler(commands=['help'])
 def cmd_help(message):
     comando = "Para iniciar nuestro bot lo puedes hacer con : /start" "\n"
-    comando += "Si necesitas revisar los comandos o ayuda envia: /help" "\n"
+    comando += "Si necesitas revisar los comandos o ayuda Envia: /help" "\n"
     comando += "Para instalar un proyector lo puedes hacer con: /Proyector" "\n"
     bot.send_message(message.chat.id, "<b>"+ comando +"</b>", parse_mode='html')
 
@@ -24,7 +24,7 @@ def cmd_help(message):
 @bot.message_handler(commands=['proyector'])
 def cmd_proyector(message):
     bot.send_message(message.chat.id, "<b>Sigue los paso y podras conectar tu proyector</b>", parse_mode='html')
-    bot.send_message(message.chat.id, "<b>Cuando estes listo: Envia </b>/listo", parse_mode='html')
+    bot.send_message(message.chat.id, "<b>Cuando estes listo Envia: </b>/listo", parse_mode='html')
 
 # Comando pdf
 @bot.message_handler(commands=['pdf'])
