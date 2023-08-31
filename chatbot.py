@@ -12,7 +12,7 @@ bot = telebot.TeleBot(API_TOKEN)
 def cmd_welcome(message):
     msg = "Hola " + message.chat.first_name + " ¿En que puedo ayudarte?"
     bot.reply_to(message, msg)
-    bot.send_message(message.chat.id, "<b>Envia el comando /help para consultar los comandos</b>")
+    bot.send_message(message.chat.id, "<b>Envia el comando /help para consultar los comandos</b>", parse_mode="html")
 
 # Comando ayuda
 @bot.message_handler(commands=['help'])
